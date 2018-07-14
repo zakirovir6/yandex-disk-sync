@@ -48,6 +48,16 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->bind(\GuzzleHttp\Client::class, \GuzzleHttp\Client::class);
+
+$app->singleton(\App\Services\YandexDiskRestApiService::class, function() {
+    $host = getenv('YANDEX_DISK_REST_API_HOST');
+
+    $service = new \App\Services\YandexDiskRestApiService($host);
+    $service->register();
+    return $service;
+});
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
