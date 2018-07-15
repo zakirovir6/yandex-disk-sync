@@ -58,6 +58,18 @@ $app->singleton(\App\Services\YandexDiskRestApiService::class, function() {
     return $service;
 });
 
+$app->singleton(\App\Services\YandexOauthTokenService::class, function() {
+    $service = new \App\Services\YandexOauthTokenService(
+        app()->make(\GuzzleHttp\Client::class),
+        getenv('YANDEX_OAUTH_CLIENT_ID'),
+        getenv('YANDEX_OAUTH_CLIENT_SECRET'),
+        getenv('YANDEX_OAUTH_DEVICE_ID'),
+        getenv('YANDEX_OAUTH_DEVICE_NAME')
+    );
+
+    return $service;
+});
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
