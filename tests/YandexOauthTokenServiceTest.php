@@ -34,7 +34,7 @@ class YandexOauthTokenServiceTest extends TestCase
      */
     public function testFakeGetConfirmationCodes()
     {
-        $this->fakeService->getConfirmationCodes();
+        $this->fakeService->requestConfirmationCodes();
     }
 
     /**
@@ -42,11 +42,11 @@ class YandexOauthTokenServiceTest extends TestCase
      */
     public function testGetConfirmationCodes()
     {
-        $codes = $this->service->getConfirmationCodes();
+        $codes = $this->service->requestConfirmationCodes();
         $this->assertTrue(true);
 
         $this->expectExceptionCode(400); //because user should confirm the code
-        $token = $this->service->getToken($codes->device_code);
+        $token = $this->service->requestToken($codes->device_code);
     }
 
 }

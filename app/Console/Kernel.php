@@ -2,8 +2,7 @@
 
 namespace App\Console;
 
-use App\Console\Commands\OauthTokenCommand;
-use App\Console\Commands\SyncCommand;
+use App\Console\Commands\YandexDiskCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
 
@@ -15,8 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        SyncCommand::class,
-        OauthTokenCommand::class,
+        YandexDiskCommand::class
     ];
 
     /**

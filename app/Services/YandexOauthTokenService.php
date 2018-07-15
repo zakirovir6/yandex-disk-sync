@@ -35,6 +35,11 @@ class YandexOauthTokenService
      */
     private $deviceName;
 
+    /**
+     * @var Token
+     */
+    private $oauthToken;
+
     public function __construct(Client $client, string $clientId, string $clientSecret, string $deviceId, string $deviceName)
     {
         $this->httpClient = $client;
@@ -47,7 +52,7 @@ class YandexOauthTokenService
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getConfirmationCodes(): ConfirmationCodes
+    public function requestConfirmationCodes(): ConfirmationCodes
     {
         $url = 'https://' . self::HOST . self::PATH_DEVICE_CODE;
 
@@ -80,7 +85,7 @@ class YandexOauthTokenService
      * @return Token
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getToken(string $deviceCode): Token
+    public function requestToken(string $deviceCode): Token
     {
         $url = 'https://' . self::HOST . self::PATH_TOKEN;
 
@@ -105,6 +110,16 @@ class YandexOauthTokenService
         $token->refresh_token = $arrayToken['refresh_token'];
         $token->token_type = $arrayToken['token_type'];
 
+        $this->oauthToken = $token;
+
         return $token;
+    }
+
+    /**
+     * @return Token
+     */
+    public function getOauthToken(): Token
+    {
+        return $this->oauthToken;
     }
 }
